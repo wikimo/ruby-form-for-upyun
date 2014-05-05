@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Upyun::Form::VERSION
   spec.authors       = ["wikimo"]
   spec.email         = ["gwikimo@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{ruby-form-for-upyun}
+  spec.description   = %q{upload picture to uppyun with form}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
+
+  spec.add_dependency "faraday"
 end

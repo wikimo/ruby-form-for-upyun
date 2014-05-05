@@ -1,6 +1,6 @@
-# Upyun::Form
+# Ruby Form For Upyun
 
-TODO: Write a gem description
+upload photo to upyun with form
 
 ## Installation
 
@@ -18,7 +18,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+require 'upyun/form'
+
+uploader = Upyun::Form::Uploader.new
+
+uploader.upload './test.jpeg'
+
+```
 
 ## Contributing
 
