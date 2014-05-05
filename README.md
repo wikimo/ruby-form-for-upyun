@@ -2,6 +2,9 @@
 
 upload photo to upyun with form
 
+## Enviroment
+ruby 2.1.1
+
 ## Installation
 
 Add this line to your application's Gemfile:
