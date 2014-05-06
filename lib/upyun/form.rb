@@ -6,30 +6,30 @@ require 'json'
 
 module Upyun
   module Form
-    # Your code goes here...
+
     class Uploader
-    	def initialize
-    		@conn = Faraday.new('http://v0.api.upyun.com') do |f|
+
+    	def initialize(bucket, form_api_secret, endpoint=0)
+    		@bucket = bucket
+    		@form_api_secret = form_api_secret
+    		@url = "http://v#{endpoint}.api.upyun.com"
+    		@conn = Faraday.new(@url) do |f|
 				  f.request :multipart
 				  f.request :url_encoded
 				  f.adapter :net_http
 				end
     	end
 
-    	def upload(file)
+    	def put(file)
     		opt = {}
-				bucket = opt['bucket'] =  'devel'
+				opt['bucket'] =  @bucket
 				opt['save-key'] =  '/demo/' + SecureRandom.uuid + '.jpeg'
 				opt['expiration'] = Time.now.to_i + 600
-				form_api_secret = 'lRJmqjI19GxB80KJc7y7NOcI+8g='
 
 				policy = Base64.encode64(opt.to_json).gsub(/\n/,'')
+				sign =  Digest::MD5.hexdigest("#{policy}&#{@form_api_secret}")
 
-				sign =  Digest::MD5.hexdigest("#{policy}&#{form_api_secret}")
-
-				url = "http://v0.api.upyun.com/#{bucket}"
-
-				response = @conn.post("#{bucket}", {:policy => policy,
+				response = @conn.post("#{@bucket}", {:policy => policy,
 					:signature => sign,
 					:file => Faraday::UploadIO.new(file, 'image/jpeg') })
 
