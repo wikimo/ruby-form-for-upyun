@@ -24,11 +24,13 @@ Or install it yourself as:
 ```
 require 'upyun/form'
 
-uploader = Upyun::Form::Uploader.new
+uploader = Upyun::Form::Uploader.new 'bucket', 'form_api_secret'
 
-uploader.upload './test.jpeg'
+uploader.put './test.jpeg'
 
 ```
+
+return a hash contains response code , message and photo url
 
 ## Contributing
 
