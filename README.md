@@ -24,18 +24,17 @@ Or install it yourself as:
 ```
 require 'upyun/form'
 
-uploader = Upyun::Form::Uploader.new 'bucket', 'form_api_secret'
+config = {:bucket => 'devel',
+					:secret => 'lRJmqjI19GxB80KJc7y7NOcI+8g=',
+					# :return_url => 'http://localhost/return_url',
+					:notify_url => 'http://dev.365jinbi.com/notify.php' }
 
-uploader.put './test.jpeg'
+uploader = Upyun::Form::Uploader.new config
 
 ```
 
-return a hash contains response code , message and photo url
+when no return url,it will return a json obj contains  http code, message and photo url 
 
-## Contributing
+when you set return url,it will return a response_headers
 
-1. Fork it ( https://github.com/[my-github-username]/upyun-form/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+when you set notify url,it will post the result to that url,in this demo,it will notify the url http://dev.365jinbi.com/notify.php, you can browser http://dev.365jinbi.com/upyun.log to see the result
