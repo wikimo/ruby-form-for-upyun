@@ -23,11 +23,24 @@ Or install it yourself as:
 
 ```
 require 'upyun/form'
+# watermark_path 需要是同一bucket文件url
+watermark_path64 = Base64.encode64("/"+watermark_path).gsub(/\n/,'')
 
 config = {:bucket => 'devel',
 					:secret => 'lRJmqjI19GxB80KJc7y7NOcI+8g=',
 					# :return_url => 'http://localhost/return_url',
-					:notify_url => 'http://dev.365jinbi.com/notify.php' }
+					:notify_url => 'http://dev.365jinbi.com/notify.php',
+          #:content_secret => "123123123",
+          :apps => [{
+                            "name" => "thumb",
+                            "x-gmkerl-thumb" => "/fwfh/900x900/watermark/url/#{watermark_path64}/align/southeast/margin/5x5",
+                            "save_tag" => "x900"
+                          },{
+                            "name" => "thumb",
+                            "x-gmkerl-thumb" => "/fwfh/200x200",
+                            "save_tag" => "x200"
+                }]
+           }
 
 uploader = Upyun::Form::Uploader.new config
 
